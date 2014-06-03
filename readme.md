@@ -1,3 +1,19 @@
+## Laravel 4 Base Project
+
+This is just a base project I hope I can reuse for some future projects.
+
+The structuring is much inspired by Dayle Rees' great post [Breaking the Mold](http://daylerees.com/breaking-the-mold) (Well almost copied, but i like so I'm gonna try it out :p).  
+It can handle users, registration, login and using the admin panel [AdminLTE](http://almsaeedstudio.com/AdminLTE/) from [Almsaeed Studio](http://almsaeedstudio.com/).
+
+### Use on your own risk
+
+You are very welcome to use this, fork it or whatever you want (But of cause following the licenses of the stuff used in here).  
+But it's on your own risk ;) This is first and foremost made for my own use :)
+
+
+
+*The original Laravel readme follows here*
+
 ## Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
