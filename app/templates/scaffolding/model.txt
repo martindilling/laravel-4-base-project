@@ -1,0 +1,34 @@
+<?php namespace ?\Models;
+
+class $NAME$ extends BaseModel
+{
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = '?';
+
+    /**
+     * Presenter to contain data logic
+     *
+     * @var string
+     */
+    protected $presenter = '?\Presenters\$NAME$Presenter';
+
+    /**
+     * Properties allowed for mass-assignment.
+     *
+     * @var array
+     */
+    protected $fillable = [];
+
+
+
+    /*********************************************
+     * Relationships
+     *********************************************/
+
+
+
+}

@@ -1,0 +1,144 @@
+<?php namespace ?\Controllers;
+
+use Illuminate\Events\Dispatcher;
+use Illuminate\Support\MessageBag;
+use ?\Repositories\$MODEL$RepositoryInterface;
+use Input;
+use View;
+use Redirect;
+
+class $NAME$ extends BaseController
+{
+    /**
+     * $MODEL$ Repository
+     *
+     * @var \?\Repositories\$MODEL$RepositoryInterface
+     */
+    protected $$COLLECTION$;
+
+    /**
+     * @var \Illuminate\Events\Dispatcher
+     */
+    protected $events;
+
+    /**
+     * @param \?\Repositories\$MODEL$RepositoryInterface  $$COLLECTION$
+     * @param \Illuminate\Events\Dispatcher  $events
+     */
+    public function __construct($MODEL$RepositoryInterface $$COLLECTION$, Dispatcher $events)
+    {
+        $this->$COLLECTION$ = $$COLLECTION$;
+        $this->events = $events;
+    }
+
+    /**
+     * Display a listing of $COLLECTION$
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        $$COLLECTION$ = $this->$COLLECTION$->all();
+
+        return View::make('$COLLECTION$.index', compact('$COLLECTION$'));
+    }
+
+    /**
+     * Show the form for creating a new $RESOURCE$
+     *
+     * @return \Illuminate\View\View
+     */
+    public function create()
+    {
+        return View::make('$COLLECTION$.create');
+    }
+
+    /**
+     * Store a newly created $RESOURCE$ in storage.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store()
+    {
+        $this->events->fire('$RESOURCE$.creating', array(Input::all()));
+        $validator = Validator::make($data = Input::all(), $MODEL$::$rules);
+
+        if ($validator->fails())
+        {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        $$RESOURCE$ = $this->$COLLECTION$->create($data);
+        $this->events->fire('$RESOURCE$.created', array($$RESOURCE$));
+
+        return Redirect::route('$COLLECTION$.index');
+    }
+
+    /**
+     * Display the specified $RESOURCE$.
+     *
+     * @param  int  $id
+     * @return \Illuminate\View\View
+     */
+    public function show($id)
+    {
+        $$RESOURCE$ = $this->$COLLECTION$->find($id);
+
+        return View::make('$COLLECTION$.show', compact('$RESOURCE$'));
+    }
+
+    /**
+     * Show the form for editing the specified $RESOURCE$.
+     *
+     * @param  int  $id
+     * @return \Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        $$RESOURCE$ = $this->$COLLECTION$->find($id);
+
+        return View::make('$COLLECTION$.edit', compact('$RESOURCE$'));
+    }
+
+    /**
+     * Update the specified $RESOURCE$ in storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update($id)
+    {
+        $$RESOURCE$ = $this->$COLLECTION$->find($id);
+        $this->events->fire('$RESOURCE$.updating', array($$RESOURCE$));
+
+        $validator = Validator::make($data = Input::all(), $MODEL$::$rules);
+
+        if ($validator->fails())
+        {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        $$RESOURCE$ = $$RESOURCE$->update($data);
+        $this->events->fire('$RESOURCE$.updated', array($$RESOURCE$));
+
+        return Redirect::route('$COLLECTION$.index');
+    }
+
+    /**
+     * Remove the specified $RESOURCE$ from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($id)
+    {
+        $$RESOURCE$ = $this->$COLLECTION$->find($id);
+        $this->events->fire('$RESOURCE$.deleting', array($$RESOURCE$));
+
+        $this->$COLLECTION$->destroy($id);
+        $this->events->fire('$RESOURCE$.deleted', array($$RESOURCE$));
+
+        return Redirect::route('$COLLECTION$.index');
+    }
+
+}

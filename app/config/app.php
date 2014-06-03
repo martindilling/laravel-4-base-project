@@ -39,7 +39,7 @@ return array(
 	|
 	*/
 
-	'timezone' => 'UTC',
+	'timezone' => 'Europe/Copenhagen',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => 'YourSecretKey!!!',
+	'key' => getenv('APP_KEY'),
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -121,6 +121,12 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+
+        'Clockwork\Support\Laravel\ClockworkServiceProvider',
+        'Rees\Sanitizer\SanitizerServiceProvider',
+        'Krucas\Notification\NotificationServiceProvider',
+
+        'MDH\Base\ServiceProviders\Repositories',
 
 	),
 
@@ -188,6 +194,10 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
+
+        'Clockwork'       => 'Clockwork\Support\Laravel\Facade',
+        'Sanitizer'       => 'Rees\Sanitizer\Facade',
+        'Notification'    => 'Krucas\Notification\Facades\Notification',
 
 	),
 

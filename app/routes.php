@@ -2,16 +2,11 @@
 
 /*
 |--------------------------------------------------------------------------
-| Application Routes
+| Unused Routes file
 |--------------------------------------------------------------------------
 |
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
+| You should use the /src/routes.php instead
+| This file will still run, but to keep all logic in one place use the other
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});

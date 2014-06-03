@@ -13,9 +13,6 @@
 
 ClassLoader::addDirectories(array(
 
-	app_path().'/commands',
-	app_path().'/controllers',
-	app_path().'/models',
 	app_path().'/database/seeds',
 
 ));
@@ -78,4 +75,17 @@ App::down(function()
 |
 */
 
-require app_path().'/filters.php';
+// Filters
+require_once base_path().'/src/filters.php';
+
+// Observers
+require_once base_path().'/src/observers.php';
+
+// Composers
+require_once base_path().'/src/composers.php';
+
+// Helpers
+require_once base_path().'/src/helpers.php';
+
+// Routes
+require_once base_path().'/src/routes.php';

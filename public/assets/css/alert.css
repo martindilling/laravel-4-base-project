@@ -1,0 +1,30 @@
+.alert {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+    border-radius: 0;
+    border-top: 0;
+}
+.alert ul {
+    list-style-type: none;
+    padding: 0;
+    position: relative;
+}
+.alert ul li {
+    padding-left: 1.2em;
+    margin: 0.1em 0;
+}
+.alert ul li:before {
+    content: url('../img/bullet.png');
+    width: 8px;
+    height: 12px;
+    display: block;
+    position: absolute;
+    left: 2px;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);
+    opacity: 0.2;
+    -webkit-transition: all 150ms linear;
+    -moz-transition: all 150ms linear;
+    -o-transition: all 150ms linear;
+    transition: all 150ms linear;
+}
