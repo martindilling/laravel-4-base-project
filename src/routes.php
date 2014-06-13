@@ -25,8 +25,8 @@ Route::post('sessions', ['as' => 'sessions.store', 'uses' => $ns.'SessionsContro
 /**
  * Registration
  */
-Route::get(   'register', ['as' => 'users.register',     'uses' => $ns.'UsersController@register']);
-Route::post(  'register', ['as' => 'users.postRegister', 'uses' => $ns.'UsersController@postRegister']);
+Route::get(   'register', ['as' => 'users.register',     'uses' => $ns.'RegistrationController@register']);
+Route::post(  'register', ['as' => 'users.postRegister', 'uses' => $ns.'RegistrationController@postRegister']);
 
 /**
  * Password Reset

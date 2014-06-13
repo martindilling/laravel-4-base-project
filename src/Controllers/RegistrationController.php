@@ -8,11 +8,10 @@ use MDH\Base\Sanitizers\UserSanitizer;
 use MDH\Base\Validators\RegisterUserValidator;
 use MDH\Base\Repositories\UserRepositoryInterface;
 use Notification;
-use Paginator;
 use Redirect;
 use View;
 
-class UsersController extends BaseController {
+class RegistrationController extends BaseController {
 
     /**
      * Category Repository
@@ -55,37 +54,39 @@ class UsersController extends BaseController {
     }
 
     /**
-     * Display a listing of categories
+     * Show the form for registering a new user
      *
      * @return Response
      */
-    public function index()
+    public function register()
     {
-        $page = Input::get('page', 1);
-        $perPage = 5;
-
-        $data = $this->users
-            ->getByPage($page, $perPage, []);
-
-        $paginator = Paginator::make($data->items, $data->totalItems, $perPage);
-
-        $users = $paginator->getCollection();
-        $pagination = (string) $paginator->links();
-
-        return View::make('users.index', compact('users', 'pagination'));
+        return View::make('users.register');
     }
 
     /**
-     * Display the specified user.
+     * Store a newly created category in storage.
      *
-     * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function postRegister()
     {
-        $user = $this->users->find($id);
+        $input = Input::all();
 
-        return View::make('users.show', compact('user'));
+        $input = $this->userSanitizer->sanitize($input);
+
+        try {
+            $this->registerUserValidator->validate($input);
+        } catch (FormValidationException $e) {
+            return Redirect::back()
+                ->withErrors($e->getErrors())
+                ->withInput();
+        }
+
+        $user = $this->users->register($input);
+        $this->events->fire('user.registered', array($user));
+
+        Notification::success('You are now registered and can login.');
+        return Redirect::route('login');
     }
 
 }

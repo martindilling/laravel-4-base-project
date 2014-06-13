@@ -1,5 +1,6 @@
 <?php namespace MDH\Base\Repositories\Eloquent;
 
+use Hash;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\MessageBag;
 use MDH\Base\Repositories\SharedInterfaces\Crudable;
@@ -35,8 +36,25 @@ class UserRepository extends BaseRepository implements RepositoryInterface, Crud
         return $this;
     }
 
+    /**
+     * Get the user count
+     *
+     * @return integer
+     */
     public function count()
     {
         return $this->getQuery()->count();
     }
-}
+
+    /**
+     * Register a new user
+     *
+     * @param array $attributes
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function register(array $attributes)
+    {
+        $attributes['password'] = Hash::make($attributes['password']);
+
+        return $this->create($attributes);
+    }}

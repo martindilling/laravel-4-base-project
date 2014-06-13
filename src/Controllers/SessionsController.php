@@ -89,7 +89,6 @@ class SessionsController extends BaseController {
                 ->withInput();
         }
 
-        // Can we log the user in?
         $attempt = Auth::attempt($credentials, $remember);
 
         if (! $attempt) {
@@ -98,7 +97,6 @@ class SessionsController extends BaseController {
                 ->withInput(Input::except('password'));
         }
 
-        // Success
         $this->events->fire('user.login', array(Auth::user()));
         Notification::success('You have been logged in!');
         return Redirect::intended(route('admin.dashboard'));
